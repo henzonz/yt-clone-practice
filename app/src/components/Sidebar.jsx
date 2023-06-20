@@ -1,3 +1,4 @@
+import React from 'react'
 import { Stack } from '@mui/material'
 import { categories } from '../utils/constants'
 
@@ -30,7 +31,7 @@ const Sidebar = ({selectedCategory, setSelectedCategory}) => (
             </button>
         ))}
     </Stack>
-)
+);
 
 
 export default Sidebar

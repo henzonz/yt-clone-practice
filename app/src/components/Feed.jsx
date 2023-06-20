@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, Stack, Typography } from '@mui/material'
 import Sidebar from './Sidebar'
 import Videos from './Videos'
@@ -8,30 +8,24 @@ import { fetchFromAPI } from '../utils/fetchFromAPI'
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState('New');
-  const [videos, setVideos] = useState([])
+  const [videos, setVideos] = useState(null)
 
   useEffect(() => {
+    setVideos(null);
     fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
-    .then((data) => {setVideos(data.items)})
+      .then((data) => setVideos(data.items))
   }, [selectedCategory])
 
   return (
-    <Stack
-      sx={{
-        flexDirection: { sx: "column", md: "row" }
+    <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
+      <Box sx={{
+        height: { sx: 'auto', md: '92vh' },
+        borderRight: '1px solid #3d3d3d',
+        px: {
+          sx: 0,
+          md: 2
+        }
       }}>
-      <Box
-        sx={{
-          height: {
-            sx: 'auto',
-            md: '92vh'
-          },
-          borderRight: '1px solid #3d3d3d',
-          px: {
-            sx: 0,
-            md: 2
-          }
-        }}>
         <Sidebar
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
@@ -43,7 +37,7 @@ const Feed = () => {
             mt: 1.5,
             color: '#fff'
           }}>
-          Copyright 2023 Henzon
+          Copyright @ 2023 Henzon
         </Typography>
       </Box>
       <Box
